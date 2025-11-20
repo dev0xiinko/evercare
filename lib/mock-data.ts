@@ -79,7 +79,7 @@ export const mockUsers: User[] = [
     email: "relative@gmail.com",
     password: "relative123",
     role: "relative",
-    name: "John Martinez",
+    name: "Adrian Alquizar",
   },
 ]
 
