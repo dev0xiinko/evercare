@@ -1,0 +1,127 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated to Modern Evercare brand colors based on inspiration */
+  --background: #fdf8f9; /* Very light warm pink/white */
+  --foreground: #4a1a23; /* Dark maroon for text */
+  --card: #ffffff;
+  --card-foreground: #4a1a23;
+  --popover: #ffffff;
+  --popover-foreground: #4a1a23;
+  --primary: #8b2635; /* Deep Maroon */
+  --primary-foreground: #ffffff;
+  --secondary: #008c9e; /* Teal/Cyan */
+  --secondary-foreground: #ffffff;
+  --muted: #f2e6e8; /* Dusty pink muted */
+  --muted-foreground: #8b5e66;
+  --accent: #d8a7b1; /* Dusty Pink Accent */
+  --accent-foreground: #4a1a23;
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: #ffffff;
+  --border: #eecdd3;
+  --input: #eecdd3;
+  --ring: #8b2635;
+  --chart-1: #8b2635;
+  --chart-2: #008c9e;
+  --chart-3: #d8a7b1;
+  --chart-4: #eecdd3;
+  --chart-5: #4a1a23;
+  --radius: 0.75rem; /* Slightly more rounded */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #4a1a23;
+  --sidebar-primary: #8b2635;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #fdf8f9;
+  --sidebar-accent-foreground: #8b2635;
+  --sidebar-border: #eecdd3;
+  --sidebar-ring: #8b2635;
+}
+
+.dark {
+  /* Dark mode adjustments */
+  --background: #1a0f11;
+  --foreground: #fdf8f9;
+  --card: #2a181c;
+  --card-foreground: #fdf8f9;
+  --popover: #2a181c;
+  --popover-foreground: #fdf8f9;
+  --primary: #d8a7b1; /* Lighter pink for dark mode primary */
+  --primary-foreground: #4a1a23;
+  --secondary: #008c9e;
+  --secondary-foreground: #ffffff;
+  --muted: #4a1a23;
+  --muted-foreground: #d8a7b1;
+  --accent: #4a1a23;
+  --accent-foreground: #fdf8f9;
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: #ffffff;
+  --border: #4a1a23;
+  --input: #4a1a23;
+  --ring: #d8a7b1;
+  --chart-1: #d8a7b1;
+  --chart-2: #008c9e;
+  --chart-3: #8b2635;
+  --chart-4: #9ca3af;
+  --chart-5: #d1d5db;
+  --sidebar: #2a181c;
+  --sidebar-foreground: #fdf8f9;
+  --sidebar-primary: #d8a7b1;
+  --sidebar-primary-foreground: #4a1a23;
+  --sidebar-accent: #4a1a23;
+  --sidebar-accent-foreground: #fdf8f9;
+  --sidebar-border: #4a1a23;
+  --sidebar-ring: #d8a7b1;
+}
+
+@theme inline {
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
