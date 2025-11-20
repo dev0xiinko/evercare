@@ -72,7 +72,7 @@ export const mockUsers: User[] = [
     email: "staff@velez.com",
     password: "staff123",
     role: "staff",
-    name: "Dr. Sarah Johnson",
+    name: "Dr. Dhane Almonicar",
   },
   {
     id: "2",
