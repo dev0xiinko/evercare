@@ -18,18 +18,18 @@ export function DashboardHeader() {
   return (
     <header className="bg-white border-b border-muted sticky top-0 z-30 shadow-sm">
       <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-center gap-4">
           {/* Mobile Logo (visible only on small screens) */}
           <div className="lg:hidden flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">E</div>
           </div>
 
           {/* Search Bar */}
-          <div className="hidden md:flex items-center relative max-w-md w-full">
+          <div className="hidden md:flex items-center relative flex-1 max-w-lg mx-auto">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               placeholder="Search patients, records, or staff..."
-              className="pl-9 bg-muted/30 border-muted focus:bg-white transition-colors rounded-full h-10"
+              className="pl-9 bg-muted/30 border-muted focus:bg-white transition-colors rounded-full h-10 w-full"
             />
           </div>
 
