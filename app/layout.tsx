@@ -1,44 +1,32 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import "./globals.css"
+import type { ReactNode } from "react";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react"; // fixed import path
+import "./globals.css";
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const geist = Geist({ subsets: ["latin"] });
+const geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Evercare - Healthcare Information System",
   description: "Your safe haven for every season of life",
   generator: "v0.app",
-  icons: [
-    {
-      url: "/icon-light-32x32.png",
-      media: "(prefers-color-scheme: light)",
-    },
-    {
-      url: "/icon-dark-32x32.png",
-      media: "(prefers-color-scheme: dark)",
-    },
-    {
-      url: "/icon.svg",
-      type: "image/svg+xml",
-    },
-  ],
-  apple: "/apple-icon.png",
+  icons: {
+    icon: "/logo.png",
+  },
+};
+
+interface RootLayoutProps {
+  children: ReactNode;
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang="en" className={geist.className}>
+      <body className={`${geist.className} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
     </html>
-  )
+  );
 }

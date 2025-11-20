@@ -3,12 +3,14 @@
 import type React from "react"
 
 import { useState } from "react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { login, type UserRole } from "@/lib/auth"
-import { AlertCircle, Globe } from "lucide-react"
+import { login } from "@/lib/auth"
+import { type UserRole } from "@/lib/mock-data"
+import { AlertCircle } from "lucide-react"
 
 export default function LoginPage() {
   const router = useRouter()
@@ -31,7 +33,7 @@ export default function LoginPage() {
       } else {
         setError("Invalid credentials. Please check your email, password, and user type.")
       }
-    } catch (err) {
+    } catch {
       setError("An error occurred during login. Please try again.")
     } finally {
       setLoading(false)
@@ -50,12 +52,12 @@ export default function LoginPage() {
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
         <div className="relative z-20 max-w-lg">
-
+          <Image src="/logo.png" alt="Evercare Logo" width={200} height={200} className="mb-6" />
           <h1 className="text-6xl font-bold mb-2 tracking-tight">
             Ever<span className="text-[#8B2635]">Care</span>
           </h1>
           <p className="text-xl font-medium opacity-90 mb-8 max-w-md leading-relaxed">
-            Wala pani here, i need an image pa to put here instead of text
+            ill polish it later, im sleepy na wahahahahah
           </p>
         </div>
 
