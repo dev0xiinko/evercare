@@ -34,3 +34,21 @@ export function getCurrentUser(): User | null {
 export function isStaff(user: User | null): boolean {
   return user?.role === "staff"
 }
+
+export function isRelative(user: User | null): boolean {
+  return user?.role === "relative"
+}
+
+export function canAccessPatient(user: User | null, patientId: string): boolean {
+  if (!user) return false
+
+  // Staff can access all patients
+  if (user.role === "staff") return true
+
+  // Relatives can only access their assigned patients
+  if (user.role === "relative" && user.assignedPatientIds) {
+    return user.assignedPatientIds.includes(patientId)
+  }
+
+  return false
+}

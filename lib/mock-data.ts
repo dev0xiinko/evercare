@@ -6,6 +6,7 @@ export interface User {
   password: string
   role: UserRole
   name: string
+  assignedPatientIds?: string[] // For relatives - limits their data access
 }
 
 export interface Patient {
@@ -65,6 +66,17 @@ export interface Invoice {
   }[]
 }
 
+export interface Message {
+  id: string
+  patientId: string
+  senderId: string
+  senderName: string
+  senderRole: "staff" | "relative"
+  content: string
+  timestamp: string
+  read: boolean
+}
+
 // Mock users
 export const mockUsers: User[] = [
   {
@@ -73,6 +85,7 @@ export const mockUsers: User[] = [
     password: "staff123",
     role: "staff",
     name: "Dr. Dhane Almonicar",
+    // Staff has access to all patients
   },
   {
     id: "2",
@@ -80,6 +93,7 @@ export const mockUsers: User[] = [
     password: "relative123",
     role: "relative",
     name: "Adrian Alquizar",
+    assignedPatientIds: ["P001"], // Relative can only see Maria Rodriguez's data
   },
 ]
 
@@ -254,24 +268,28 @@ export const mockActivities = [
     type: "admission",
     message: "New patient admitted: Elizabeth Thompson",
     time: "2 hours ago",
+    patientId: "P003",
   },
   {
     id: "2",
     type: "medication",
     message: "Medication administered to Maria Rodriguez",
     time: "4 hours ago",
+    patientId: "P001",
   },
   {
     id: "3",
     type: "appointment",
     message: "Physical therapy session completed for Robert Chen",
     time: "6 hours ago",
+    patientId: "P002",
   },
   {
     id: "4",
     type: "billing",
     message: "Invoice INV001 marked as paid",
     time: "1 day ago",
+    patientId: "P001",
   },
 ]
 
@@ -283,6 +301,7 @@ export const mockNotifications = [
     message: "Critical patient alert: Elizabeth Thompson requires immediate attention",
     time: "30 minutes ago",
     read: false,
+    patientId: "P003",
   },
   {
     id: "2",
@@ -290,6 +309,7 @@ export const mockNotifications = [
     message: "Medication due for Maria Rodriguez at 2:00 PM",
     time: "1 hour ago",
     read: false,
+    patientId: "P001",
   },
   {
     id: "3",
@@ -297,5 +317,50 @@ export const mockNotifications = [
     message: "Monthly billing cycle starts tomorrow",
     time: "3 hours ago",
     read: true,
+    patientId: undefined, // System-wide notification
+  },
+]
+
+// Mock messages between relatives and staff
+export const mockMessages: Message[] = [
+  {
+    id: "MSG001",
+    patientId: "P001",
+    senderId: "1",
+    senderName: "Dr. Dhane Almonicar",
+    senderRole: "staff",
+    content: "Maria is recovering well. Her blood sugar levels are now stable. Keep encouraging her to walk around the room.",
+    timestamp: "2024-03-15 10:30 AM",
+    read: true,
+  },
+  {
+    id: "MSG002",
+    patientId: "P001",
+    senderId: "2",
+    senderName: "Adrian Alquizar",
+    senderRole: "relative",
+    content: "Thank you for the update! I'll make sure to encourage her. When can I visit next?",
+    timestamp: "2024-03-15 2:45 PM",
+    read: true,
+  },
+  {
+    id: "MSG003",
+    patientId: "P001",
+    senderId: "1",
+    senderName: "Dr. Dhane Almonicar",
+    senderRole: "staff",
+    content: "You can visit anytime between 9 AM and 8 PM. Maria would appreciate seeing you.",
+    timestamp: "2024-03-15 3:15 PM",
+    read: true,
+  },
+  {
+    id: "MSG004",
+    patientId: "P001",
+    senderId: "1",
+    senderName: "Dr. Dhane Almonicar",
+    senderRole: "staff",
+    content: "Quick update: Maria completed her physical therapy session today with great progress!",
+    timestamp: "2024-03-16 11:00 AM",
+    read: false,
   },
 ]

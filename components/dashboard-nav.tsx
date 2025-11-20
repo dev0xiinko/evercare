@@ -5,16 +5,16 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { LayoutDashboard, Users, FileText, Pill, Heart, DollarSign, Menu, X } from "lucide-react"
 import { useState } from "react"
-import { getCurrentUser, isStaff } from "@/lib/auth"
+import { getCurrentUser, isStaff, isRelative } from "@/lib/auth"
 import { Button } from "@/components/ui/button"
 
 const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, staffOnly: false },
-  { href: "/dashboard/patients", label: "Patients", icon: Users, staffOnly: false },
-  { href: "/dashboard/clinical", label: "Clinical Records", icon: FileText, staffOnly: true },
-  { href: "/dashboard/pharmacy", label: "Pharmacy", icon: Pill, staffOnly: false },
-  { href: "/dashboard/wellness", label: "Wellness", icon: Heart, staffOnly: false },
-  { href: "/dashboard/finance", label: "Finance", icon: DollarSign, staffOnly: false },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, staffOnly: false, relativeOnly: false },
+  { href: "/dashboard/patients", label: "Patients", icon: Users, staffOnly: true, relativeOnly: false },
+  { href: "/dashboard/clinical", label: "Clinical Records", icon: FileText, staffOnly: true, relativeOnly: false },
+  { href: "/dashboard/pharmacy", label: "Pharmacy", icon: Pill, staffOnly: true, relativeOnly: false },
+  { href: "/dashboard/wellness", label: "Wellness", icon: Heart, staffOnly: true, relativeOnly: false },
+  { href: "/dashboard/finance", label: "Finance", icon: DollarSign, staffOnly: true, relativeOnly: false },
 ]
 
 export function DashboardNav() {
@@ -22,8 +22,16 @@ export function DashboardNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const user = getCurrentUser()
   const userIsStaff = isStaff(user)
+  const userIsRelative = isRelative(user)
 
-  const filteredNavItems = navItems.filter((item) => !item.staffOnly || userIsStaff)
+  const filteredNavItems = navItems.filter((item) => {
+    // Relatives only see dashboard
+    if (userIsRelative) {
+      return !item.staffOnly && item.relativeOnly === false && item.href === "/dashboard"
+    }
+    // Staff see everything except relativeOnly items
+    return !item.staffOnly || userIsStaff
+  })
 
   return (
     <>
@@ -91,13 +99,6 @@ export function DashboardNav() {
             )
           })}
         </nav>
-
-        <div className="p-4 border-t border-muted bg-muted/30">
-          <div className="text-xs text-muted-foreground text-center p-3 bg-white rounded-lg border border-muted shadow-sm">
-            <p className="font-semibold text-primary">Prototype Mode</p>
-            <p>Mock Data Only</p>
-          </div>
-        </div>
       </aside>
 
       {/* Bottom navigation for mobile */}
