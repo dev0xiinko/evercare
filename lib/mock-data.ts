@@ -172,7 +172,7 @@ export const mockMedications: MedicationRecord[] = [
     frequency: "Twice daily",
     startDate: "2024-01-15",
     status: "Active",
-    prescribedBy: "Dr. Sarah Johnson",
+    prescribedBy: "Dr. Dhane Almonicar",
   },
   {
     id: "MED002",
@@ -182,7 +182,7 @@ export const mockMedications: MedicationRecord[] = [
     frequency: "Once daily",
     startDate: "2024-01-15",
     status: "Active",
-    prescribedBy: "Dr. Sarah Johnson",
+    prescribedBy: "Dr. Dhane Almonicar",
   },
   {
     id: "MED003",
@@ -192,7 +192,7 @@ export const mockMedications: MedicationRecord[] = [
     frequency: "Once daily",
     startDate: "2024-02-01",
     status: "Active",
-    prescribedBy: "Dr. Michael Lee",
+    prescribedBy: "Dr. Dhane Almonicar",
   },
 ]
 
@@ -211,7 +211,7 @@ export const mockProgressNotes: ProgressNote[] = [
     id: "PN002",
     patientId: "P001",
     date: "2024-03-14",
-    author: "Dr. Sarah Johnson",
+    author: "Dr. Dhane Almonicar",
     authorRole: "Doctor",
     note: "Weekly checkup completed. Vital signs within normal range. Continue current treatment plan. Schedule follow-up in one week.",
     category: "Medical Review",

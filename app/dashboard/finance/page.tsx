@@ -3,10 +3,23 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { mockInvoices } from "@/lib/mock-data"
 import { DollarSign, Download, Printer, Send } from "lucide-react"
+import { getCurrentUser } from "@/lib/auth"
+import { getAccessibleInvoices } from "@/lib/utils"
 
 export default function FinancePage() {
+  const user = getCurrentUser()
+  const accessibleInvoices = getAccessibleInvoices(user)
+
+  const pendingTotal = accessibleInvoices
+    .filter((i) => i.status === "Pending")
+    .reduce((sum, i) => sum + i.amount, 0)
+
+  const paidTotal = accessibleInvoices
+    .filter((i) => i.status === "Paid")
+    .reduce((sum, i) => sum + i.amount, 0)
+
+  const totalRevenue = accessibleInvoices.reduce((sum, i) => sum + i.amount, 0)
   return (
     <div className="space-y-6">
       <div>
@@ -21,8 +34,8 @@ export default function FinancePage() {
             <CardTitle className="text-sm font-medium text-muted-foreground">Total Revenue (Month)</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">$9,700.00</p>
-            <p className="text-xs text-muted-foreground mt-1">From {mockInvoices.length} invoices</p>
+            <p className="text-2xl font-bold">${totalRevenue.toFixed(2)}</p>
+            <p className="text-xs text-muted-foreground mt-1">From {accessibleInvoices.length} invoices</p>
           </CardContent>
         </Card>
 
@@ -32,14 +45,10 @@ export default function FinancePage() {
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold text-secondary">
-              $
-              {mockInvoices
-                .filter((i) => i.status === "Pending")
-                .reduce((sum, i) => sum + i.amount, 0)
-                .toFixed(2)}
+              ${pendingTotal.toFixed(2)}
             </p>
             <p className="text-xs text-muted-foreground mt-1">
-              {mockInvoices.filter((i) => i.status === "Pending").length} invoices
+              {accessibleInvoices.filter((i) => i.status === "Pending").length} invoices
             </p>
           </CardContent>
         </Card>
@@ -50,14 +59,10 @@ export default function FinancePage() {
           </CardHeader>
           <CardContent>
             <p className="text-2xl font-bold text-primary">
-              $
-              {mockInvoices
-                .filter((i) => i.status === "Paid")
-                .reduce((sum, i) => sum + i.amount, 0)
-                .toFixed(2)}
+              ${paidTotal.toFixed(2)}
             </p>
             <p className="text-xs text-muted-foreground mt-1">
-              {mockInvoices.filter((i) => i.status === "Paid").length} invoices
+              {accessibleInvoices.filter((i) => i.status === "Paid").length} invoices
             </p>
           </CardContent>
         </Card>
@@ -65,7 +70,7 @@ export default function FinancePage() {
 
       {/* Invoices */}
       <div className="space-y-4">
-        {mockInvoices.map((invoice) => (
+        {accessibleInvoices.map((invoice) => (
           <Card key={invoice.id}>
             <CardHeader>
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">

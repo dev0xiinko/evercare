@@ -7,12 +7,16 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { mockPatients, mockMedications, mockProgressNotes } from "@/lib/mock-data"
 import { getCurrentUser, isStaff } from "@/lib/auth"
+import { getAccessiblePatients, getAccessibleMedications, getAccessibleProgressNotes } from "@/lib/utils"
 import { FileText, Pill, Activity, AlertCircle, Plus } from "lucide-react"
 
 export default function ClinicalPage() {
   const router = useRouter()
   const user = getCurrentUser()
   const userIsStaff = isStaff(user)
+  const accessiblePatients = getAccessiblePatients(user)
+  const accessibleMedications = getAccessibleMedications(user)
+  const accessibleProgressNotes = getAccessibleProgressNotes(user)
 
   useEffect(() => {
     if (!userIsStaff) {
@@ -46,7 +50,7 @@ export default function ClinicalPage() {
 
       {/* EHR Overview */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {mockPatients.map((patient) => (
+        {accessiblePatients.map((patient) => (
           <Card key={patient.id}>
             <CardHeader>
               <CardTitle className="text-lg flex items-center justify-between">
@@ -96,7 +100,7 @@ export default function ClinicalPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
-            {mockMedications.map((med) => {
+            {accessibleMedications.map((med) => {
               const patient = mockPatients.find((p) => p.id === med.patientId)
               return (
                 <div key={med.id} className="flex items-center justify-between p-3 rounded-lg border">
@@ -134,7 +138,7 @@ export default function ClinicalPage() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {mockProgressNotes.map((note) => {
+            {accessibleProgressNotes.map((note) => {
               const patient = mockPatients.find((p) => p.id === note.patientId)
               return (
                 <div key={note.id} className="p-4 rounded-lg border">

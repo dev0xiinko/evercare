@@ -1,25 +1,29 @@
 "use client"
 
-import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { mockPatients, mockEmergencyContacts } from "@/lib/mock-data"
+import { useState } from "react"
 import { Search, Plus, Phone, User } from "lucide-react"
+import { getCurrentUser } from "@/lib/auth"
+import { getAccessiblePatients, getAccessibleEmergencyContacts } from "@/lib/utils"
 
 export default function PatientsPage() {
+  const user = getCurrentUser()
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedPatient, setSelectedPatient] = useState<string | null>(null)
 
-  const filteredPatients = mockPatients.filter(
+  const accessiblePatients = getAccessiblePatients(user)
+  const filteredPatients = accessiblePatients.filter(
     (patient) =>
       patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       patient.id.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
-  const selectedPatientData = mockPatients.find((p) => p.id === selectedPatient)
-  const patientContacts = mockEmergencyContacts.filter((c) => c.patientId === selectedPatient)
+  const selectedPatientData = accessiblePatients.find((p) => p.id === selectedPatient)
+  const accessibleContacts = getAccessibleEmergencyContacts(user)
+  const patientContacts = accessibleContacts.filter((c) => c.patientId === selectedPatient)
 
   return (
     <div className="space-y-6">

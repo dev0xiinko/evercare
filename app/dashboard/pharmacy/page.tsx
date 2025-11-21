@@ -3,10 +3,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { mockMedications, mockPatients } from "@/lib/mock-data"
+import { mockPatients } from "@/lib/mock-data"
 import { Pill, RefreshCw, Plus } from "lucide-react"
+import { getCurrentUser } from "@/lib/auth"
+import { getAccessibleMedications } from "@/lib/utils"
 
 export default function PharmacyPage() {
+  const user = getCurrentUser()
+  const accessibleMedications = getAccessibleMedications(user)
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -21,7 +26,7 @@ export default function PharmacyPage() {
       </div>
 
       <div className="grid gap-4">
-        {mockMedications.map((med) => {
+        {accessibleMedications.map((med) => {
           const patient = mockPatients.find((p) => p.id === med.patientId)
           return (
             <Card key={med.id}>

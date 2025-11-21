@@ -3,10 +3,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { mockPatients } from "@/lib/mock-data"
 import { Heart, Activity, TrendingUp, Calendar } from "lucide-react"
+import { getCurrentUser } from "@/lib/auth"
+import { getAccessiblePatients, getAccessibleActivities } from "@/lib/utils"
 
 export default function WellnessPage() {
+  const user = getCurrentUser()
+  const accessiblePatients = getAccessiblePatients(user)
+  const accessibleActivities = getAccessibleActivities(user)
+
   return (
     <div className="space-y-6">
       <div>
@@ -15,7 +20,7 @@ export default function WellnessPage() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {mockPatients.map((patient) => (
+        {accessiblePatients.map((patient) => (
           <Card key={patient.id}>
             <CardHeader>
               <CardTitle className="text-lg">{patient.name}</CardTitle>
