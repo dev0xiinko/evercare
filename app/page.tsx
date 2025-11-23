@@ -43,25 +43,40 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-[#D8A7B1]/20">
       {/* Left Side - Branding & Visuals */}
-      <div className="lg:w-1/2 relative bg-[#D8A7B1] overflow-hidden flex flex-col justify-center p-12 text-white">
+      <div className="lg:w-1/2 relative bg-linear-to-br from-[#D8A7B1] to-[#C891A0] overflow-hidden flex flex-col justify-center items-center p-12 text-white">
         {/* Geometric Accents */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#8B2635] transform rotate-45 translate-x-32 -translate-y-32 z-10"></div>
-        <div className="absolute top-0 right-0 w-48 h-48 bg-[#008C9E] transform rotate-45 translate-x-24 -translate-y-12 z-0 opacity-80"></div>
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#8B2635] transform rotate-45 translate-x-40 -translate-y-40 z-10 opacity-60"></div>
+        <div className="absolute bottom-10 left-5 w-64 h-64 bg-[#008C9E] transform -rotate-45 -translate-x-20 translate-y-20 z-10 opacity-40"></div>
 
         {/* Texture overlay */}
-        <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
-        <div className="relative z-20 max-w-lg">
-          <Image src="/logo.png" alt="Evercare Logo" width={200} height={200} className="mb-6" />
-          <h1 className="text-6xl font-bold mb-2 tracking-tight">
-            Ever<span className="text-[#8B2635]">Care</span>
-          </h1>
-          <p className="text-xl font-medium opacity-90 mb-8 max-w-md leading-relaxed">
-            ill polish it later, im sleepy na wahahahahah
-          </p>
+        <div className="relative z-20 max-w-xl text-center space-y-8">
+          {/* Logo */}
+          <div className="flex justify-center">
+            <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl">
+              <Image src="/logo.png" alt="Evercare Logo" width={120} height={120} className="drop-shadow-lg" />
+            </div>
+          </div>
+
+          {/* Branding */}
+          <div className="space-y-4">
+            <h1 className="text-7xl font-bold tracking-tight drop-shadow-lg">
+              Ever<span className="text-white">Care</span>
+            </h1>
+            <p className="text-2xl font-light opacity-95 drop-shadow">
+              Your safe haven for every season of life
+            </p>
+          </div>
+
+          {/* Disclaimer & Project Info */}
+          <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 space-y-3">
+            <p className="text-lg font-semibold drop-shadow">This website prototype is for educational purposes only.</p>
+            <p className="text-sm opacity-90 drop-shadow">Health Information Systems Final Project – BSMT - 1I Table 1 (S.Y 2024-2025)</p>
+          </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-2 bg-[#008C9E]"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-linear-to-r from-[#008C9E] via-[#D8A7B1] to-[#8B2635]"></div>
       </div>
 
       {/* Right Side - Login Form */}

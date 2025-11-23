@@ -10,7 +10,7 @@ const geistMono = Geist_Mono({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Evercare - Healthcare Information System",
   description: "Your safe haven for every season of life",
-  generator: "v0.app",
+  generator: "Adrian Alquizar",
   icons: {
     icon: "/logo.png",
   },

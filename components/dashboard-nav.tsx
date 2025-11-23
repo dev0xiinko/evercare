@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { LayoutDashboard, Users, FileText, Pill, Heart, DollarSign, Menu, X } from "lucide-react"
 import { useState } from "react"
@@ -63,7 +64,7 @@ export function DashboardNav() {
       >
         <div className="p-6 border-b border-muted">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">E</div>
+            <Image src="/logo.png" alt="Evercare Logo" width={32} height={32} className="rounded-lg" />
             <h2 className="font-bold text-xl text-primary tracking-tight">
               Ever<span className="text-foreground">Care</span>
             </h2>

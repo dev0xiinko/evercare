@@ -77,7 +77,7 @@ export default function WellnessPage() {
         ))}
       </div>
 
-      <Card className="bg-gradient-to-br from-secondary/5 to-primary/5">
+      <Card className="bg-linear-to-br from-secondary/5 to-primary/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-secondary" />

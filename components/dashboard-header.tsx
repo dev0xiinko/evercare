@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { LogOut, Bell, Search, Settings } from "lucide-react"
 import { logout, getCurrentUser } from "@/lib/auth"
@@ -21,7 +22,7 @@ export function DashboardHeader() {
         <div className="flex items-center justify-center gap-4">
           {/* Mobile Logo (visible only on small screens) */}
           <div className="lg:hidden flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">E</div>
+            <Image src="/logo.png" alt="Evercare Logo" width={32} height={32} className="rounded-lg" />
           </div>
 
           {/* Search Bar */}
