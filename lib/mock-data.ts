@@ -92,7 +92,7 @@ export const mockUsers: User[] = [
     email: "relative@gmail.com",
     password: "relative123",
     role: "relative",
-    name: "Adrian Alquizar",
+    name: "Mia Bordios",
     assignedPatientIds: ["P001"], // Relative can only see Maria Rodriguez's data
   },
 ]
